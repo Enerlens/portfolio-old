@@ -153,11 +153,19 @@
 
       /* Animation Classes */
       .reveal-element { opacity: 1; transform: translateY(0); }
+
+      @keyframes aurora-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+      @keyframes float-slow{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.02)}}
+      .animate-aurora{background-size:200% 200%;animation:aurora-shift 20s ease infinite}
+      .animate-float-slow{animation:float-slow 8s ease-in-out infinite}
     </style>
   </head>
   <body class="overflow-x-hidden w-full">
     <!-- Loader -->
-    <div class="loader" id="loader">
+    <div
+      class="loader"
+      id="loader"
+    >
       <div class="flex flex-col items-center gap-4">
         <div
           class="font-mono text-6xl md:text-8xl font-semibold tracking-tighter"
@@ -182,19 +190,36 @@
     <header
       id="main-navbar"
       class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full mx-auto max-w-4xl text-primary font-sans transition-all duration-500 ease-in-out"
-      style="opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto;"
+      style="opacity: 0; transform: translateX(-50%) translateY(-100%); pointer-events: none;"
     >
       <div class="px-4">
         <div
           class="flex bg-white/90 h-14 ring-black/5 ring-1 rounded-full pr-2 pl-2 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] backdrop-blur-xl items-center justify-between"
         >
-          <a href="#" class="flex gap-3 items-center pl-2">
-            <img
-              src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png"
-              class="w-8 h-8 rounded-full border border-gray-100 object-cover"
-              alt="Melvyn"
-            />
+          <!-- Left: Profile, Name & Status -->
+          <a href="#" class="flex gap-2.5 items-center pl-1.5 shrink-0 group">
+            <div class="relative">
+              <img
+                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png"
+                class="w-8 h-8 rounded-full border border-gray-100 object-cover"
+                alt="Melvyn"
+              />
+              <div
+                class="absolute -bottom-0.5 -right-0.5 bg-white rounded-full p-[1.5px]"
+              >
+                <div
+                  class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                ></div>
+              </div>
+            </div>
+            <span
+              class="font-semibold text-sm tracking-tight text-gray-900 group-hover:text-primary transition-colors"
+            >
+              Melvyn
+            </span>
           </a>
+
+          <!-- Center: Desktop Navigation (Hidden on Mobile) -->
           <nav class="hidden md:flex items-center gap-1">
             <a
               href="#about"
@@ -221,10 +246,12 @@
               Assistant IA
             </a>
           </nav>
+
+          <!-- Right: Desktop Action (Hidden on Mobile) -->
           <div class="hidden md:flex items-center gap-3">
             <a
               href="#contact"
-              class="liquid-glass-button relative inline-flex h-9 cursor-pointer outline-none overflow-hidden transition-all duration-300 ease-out text-xs font-bold uppercase tracking-widest bg-primary text-white border border-primary/10 rounded-full px-5 items-center justify-center hover:bg-gray-800 shadow-md"
+              class="relative inline-flex h-9 cursor-pointer outline-none overflow-hidden transition-all duration-300 ease-out text-xs font-bold uppercase tracking-widest bg-primary text-white border border-primary/10 rounded-full px-5 items-center justify-center hover:bg-gray-800 shadow-md"
             >
               <span class="relative z-10">Contact</span>
               <div
@@ -236,26 +263,36 @@
               </div>
             </a>
           </div>
-          <button
-            class="md:hidden inline-flex items-center justify-center rounded-full w-9 h-9 p-2 hover:bg-gray-100 text-gray-600"
-            id="mobile-menu-btn"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+
+          <!-- Right: Mobile Actions (Visible on Mobile) -->
+          <div class="flex items-center gap-2 md:hidden">
+            <a
+              href="#contact"
+              class="inline-flex h-8 px-4 items-center justify-center text-[10px] font-bold uppercase tracking-widest bg-primary text-white rounded-full hover:bg-gray-800 transition-colors shadow-sm"
             >
-              <path d="M4 12h16"></path>
-              <path d="M4 18h16"></path>
-              <path d="M4 6h16"></path>
-            </svg>
-          </button>
+              Contact
+            </a>
+            <button
+              class="inline-flex items-center justify-center rounded-full w-9 h-9 p-2 hover:bg-gray-100 text-gray-600 transition-colors"
+              id="mobile-menu-btn"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M4 12h16"></path>
+                <path d="M4 18h16"></path>
+                <path d="M4 6h16"></path>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
       <div
@@ -302,7 +339,7 @@
 
     <!-- Hero Section -->
     <section
-      class="min-h-screen flex flex-col overflow-hidden md:px-6 lg:px-8 pt-4 pr-4 pl-4 relative"
+      class="min-h-screen flex flex-col overflow-hidden md:px-6 min-h-[100dvh] pt-0 pr-4 pl-4 relative"
     >
       <canvas
         id="hero-canvas"
@@ -314,21 +351,21 @@
         class="flex flex-col w-full h-full max-w-[1400px] z-10 mr-auto ml-auto relative"
       >
         <div
-          class="flex-1 flex flex-col text-center w-full mt-20 md:mt-24 pb-16 md:pb-20 items-center justify-center gap-0"
+          class="flex-1 flex flex-col text-center w-full pt-28 md:pt-40 pb-20 items-center justify-center"
         >
           <!-- Logo -->
-          <div class="mb-4 md:mb-8 lg:mb-12 opacity-0 hero-fade-in">
+          <div class="mb-10 md:mb-14 opacity-0 hero-fade-in">
             <img
               src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png"
               alt="Melvyn Logo"
-              class="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-cover border-gray-100 border rounded-full shadow-sm"
-              style="object-position: center 35%"
+              class="w-32 h-32 object-cover border-gray-100 border rounded-full shadow-sm"
+              style="object-position: center 35%;"
             />
           </div>
 
           <!-- Badge -->
           <div
-            class="mb-4 md:mb-8 lg:mb-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50/80 border border-green-200/50 backdrop-blur-sm shadow-sm opacity-0 hero-fade-in"
+            class="mb-10 md:mb-14 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50/80 border border-green-200/50 backdrop-blur-sm shadow-sm opacity-0 hero-fade-in"
           >
             <div class="relative flex h-2.5 w-2.5">
               <span
@@ -347,7 +384,7 @@
 
           <!-- Main Title -->
           <h1
-            class="flex flex-col items-center text-[12vw] md:text-[8vw] lg:text-[7vw] xl:text-[6vw] leading-[0.85] font-semibold tracking-tighter text-primary uppercase select-none"
+            class="flex flex-col items-center text-[10vw] md:text-[8vw] leading-[0.85] font-semibold tracking-tighter text-primary uppercase select-none"
           >
             <div class="overflow-hidden">
               <span class="hero-char text-primary">MELVYN</span>
@@ -358,11 +395,9 @@
           </h1>
 
           <!-- Tagline -->
-          <div
-            class="mt-4 md:mt-10 lg:mt-14 max-w-2xl mx-auto px-4 opacity-0 hero-fade-in"
-          >
+          <div class="mt-12 md:mt-16 max-w-2xl mx-auto px-4 opacity-0 hero-fade-in">
             <p
-              class="font-sans text-sm md:text-xl text-secondary leading-relaxed text-balance"
+              class="font-sans text-base md:text-xl text-secondary leading-relaxed text-balance"
             >
               Je transforme des expertises métier en produits structurés et
               scalables.
@@ -387,10 +422,10 @@
 
     <!-- Marquee Skills -->
     <div
-      class="py-5 bg-primary text-white overflow-hidden border-y border-white/10 select-none relative z-20"
+      class="overflow-hidden border-y border-white/10 bg-primary text-white py-5 relative z-20 select-none"
     >
       <div
-        class="marquee-track font-mono text-xs font-medium uppercase tracking-[0.2em]"
+        class="marquee-track flex w-max font-mono text-xs font-medium uppercase tracking-[0.2em]"
       >
         <span class="mx-6">Product Strategy</span>
         <span class="text-accent">•</span>
@@ -398,49 +433,58 @@
         <span class="text-accent">•</span>
         <span class="mx-6">SaaS</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Scrum/PSPO</span>
+        <span class="mx-6">Product Ops</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Roadmap</span>
+        <span class="mx-6">Discovery</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Business Case</span>
+        <span class="mx-6">Go-To-Market</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Stakeholder Management</span>
+        <span class="mx-6">Product-Led Growth</span>
         <span class="text-accent">•</span>
         <span class="mx-6">Data Analysis</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">CRM Salesforce</span>
+        <span class="mx-6">Automation &amp; API</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Product Ops</span>
+        <span class="mx-6">Pricing Strategy</span>
         <span class="text-accent">•</span>
+        <span class="mx-6">Stakeholder Management</span>
+        <span class="text-accent">•</span>
+        <span class="mx-6">Scrum/PSPO</span>
+        <span class="text-accent">•</span>
+        <!-- Duplicate for infinite loop -->
         <span class="mx-6">Product Strategy</span>
         <span class="text-accent">•</span>
         <span class="mx-6">Énergie B2B</span>
         <span class="text-accent">•</span>
         <span class="mx-6">SaaS</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Scrum/PSPO</span>
+        <span class="mx-6">Product Ops</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Roadmap</span>
+        <span class="mx-6">Discovery</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Business Case</span>
+        <span class="mx-6">Go-To-Market</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Stakeholder Management</span>
+        <span class="mx-6">Product-Led Growth</span>
         <span class="text-accent">•</span>
         <span class="mx-6">Data Analysis</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">CRM Salesforce</span>
+        <span class="mx-6">Automation &amp; API</span>
         <span class="text-accent">•</span>
-        <span class="mx-6">Product Ops</span>
+        <span class="mx-6">Pricing Strategy</span>
+        <span class="text-accent">•</span>
+        <span class="mx-6">Stakeholder Management</span>
+        <span class="text-accent">•</span>
+        <span class="mx-6">Scrum/PSPO</span>
         <span class="text-accent">•</span>
       </div>
     </div>
 
     <!-- Mon Approche Section -->
     <section
-      class="sm:px-6 sm:mt-20 lg:mt-28 max-w-7xl border-black/5 border-t mt-16 mr-auto ml-auto pt-10 lg:pt-16 pr-4 pl-4"
+      class="sm:px-6 sm:mt-20 max-w-7xl border-black/5 border-t mt-16 mr-auto ml-auto pt-10 pr-4 pl-4"
       id="about"
     >
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-start">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
         <div class="md:col-span-5">
           <div
             class="relative aspect-[16/12] md:aspect-[4/5] rounded-3xl overflow-hidden border border-white/60 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
@@ -452,7 +496,7 @@
                 class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#6366F1_50%,#E2E8F0_100%)]"
               ></span>
               <img
-                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/76397c14-f815-4738-8905-2a30f93d4fe_800w.png"
+                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/76397c14-f815-4738-8905-52a30f93d4fe_800w.png"
                 alt="Melvyn Raymond"
                 class="relative w-full h-full object-cover rounded-[22px] bg-white block"
               />
@@ -568,8 +612,7 @@
             </p>
           </div>
 
-          <a
-            href="#contact"
+          <a href="#contact"
             class="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium tracking-tight text-white bg-gray-900 hover:bg-gray-800 border border-gray-900"
           >
             <span>Me contacter</span>
@@ -580,11 +623,11 @@
 
     <!-- Selected Work -->
     <section
-      class="md:px-8 md:py-32 lg:py-40 max-w-[1600px] mr-auto ml-auto pt-16 pr-4 pb-16 pl-4"
+      class="md:px-8 md:py-32 max-w-[1600px] mr-auto ml-auto pt-20 pr-4 pb-20 pl-4"
       id="work"
     >
       <div
-        class="flex flex-col items-center justify-center md:mb-28 lg:mb-36 border-line reveal-element border-b mb-12 pb-6 text-center"
+        class="flex flex-col items-center justify-center md:mb-28 border-line reveal-element border-b mb-20 pb-6 text-center"
       >
         <h2
           class="md:text-7xl uppercase text-primary text-balance text-4xl font-medium tracking-tighter text-center"
@@ -631,10 +674,10 @@
         </div>
       </div>
 
-      <div class="md:space-y-40 lg:space-y-48 space-y-16">
+      <div class="md:space-y-40 space-y-24">
         <!-- Project 1: OptiMatch -->
         <div
-          class="reveal-element group project-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 xl:gap-20 items-center"
+          class="reveal-element group project-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 gap-x-8 gap-y-8 items-center"
         >
           <div
             class="lg:col-span-7 overflow-hidden rounded-lg aspect-[4/3] md:aspect-[16/10] relative cursor-pointer bg-gray-100 order-2 lg:order-1"
@@ -655,7 +698,7 @@
                     <span
                       class="text-[10px] uppercase tracking-wider font-semibold text-subtle"
                     >
-                      OptiMatch — Moteur d'Éligibilité
+                      OptiMatch — Moteur Éligibilité
                     </span>
                   </div>
                 </div>
@@ -787,10 +830,7 @@
               <div
                 class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-accent"
               >
-                <iconify-icon
-                  icon="solar:bolt-circle-linear"
-                  class="text-sm"
-                ></iconify-icon>
+                <iconify-icon icon="solar:bolt-circle-linear" class="text-sm"></iconify-icon>
                 <span>Moteur de décision</span>
               </div>
               <div
@@ -819,21 +859,9 @@
               préservés.
             </p>
             <div class="flex flex-wrap gap-2 mt-2">
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Règles Métier
-              </span>
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Scoring
-              </span>
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Algo
-              </span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Règles Métier</span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">UX</span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Algo</span>
             </div>
             <a
               href="#"
@@ -850,29 +878,20 @@
 
         <!-- Project 2: Plateforme SaaS -->
         <div
-          class="reveal-element group project-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 xl:gap-20 items-center"
+          class="reveal-element group project-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
         >
-          <div
-            class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-1"
-          >
+          <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-1">
             <div
               class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-accent"
             >
-              <iconify-icon
-                icon="solar:widget-linear"
-                class="text-sm"
-              ></iconify-icon>
+              <iconify-icon icon="solar:widget-linear" class="text-sm"></iconify-icon>
               <span>Intégration SaaS</span>
             </div>
             <h3
               class="md:text-5xl text-primary group-hover:scale-[1.02] group-hover:tracking-tight transition-all duration-500 ease-out origin-left text-3xl font-semibold tracking-tighter"
             >
               <span class="text-stone-300">Plateforme</span>
-              <span
-                class="animate-pulse inline-block text-orange-500 mr-1 ml-1"
-              >
-                ·
-              </span>
+              <span class="animate-pulse inline-block text-orange-500 mx-0.5">·</span>
               <span
                 class="bg-clip-text text-transparent bg-gradient-to-br from-orange-500 to-amber-400"
               >
@@ -890,21 +909,9 @@
               déploiement sur les premiers portefeuilles clients.
             </p>
             <div class="flex flex-wrap gap-2 mt-2">
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Benchmark
-              </span>
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                PRD
-              </span>
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Change Mgmt
-              </span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Benchmark</span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">PRD</span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Change Mgmt</span>
             </div>
             <a
               href="#"
@@ -930,17 +937,14 @@
 
         <!-- Project 3: OptiLead -->
         <div
-          class="reveal-element group project-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 xl:gap-20 items-center"
+          class="reveal-element group project-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 gap-x-8 gap-y-8 items-center"
         >
-          <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-1">
+          <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-2">
             <div class="flex items-center justify-between">
               <div
                 class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-accent"
               >
-                <iconify-icon
-                  icon="solar:filter-linear"
-                  class="text-sm"
-                ></iconify-icon>
+                <iconify-icon icon="solar:filter-linear" class="text-sm"></iconify-icon>
                 <span>Qualification Leads</span>
               </div>
               <div
@@ -968,21 +972,9 @@
               externes.
             </p>
             <div class="flex flex-wrap gap-2 mt-2">
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Product Ops
-              </span>
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Automation
-              </span>
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Data
-              </span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Product Ops</span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Automation</span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Data</span>
             </div>
             <a
               href="#"
@@ -996,7 +988,7 @@
             </a>
           </div>
           <div
-            class="lg:col-span-7 overflow-hidden rounded-lg aspect-[4/3] md:aspect-[16/10] relative cursor-pointer order-2 lg:order-2 bg-gray-100"
+            class="lg:col-span-7 overflow-hidden rounded-lg aspect-[4/3] md:aspect-[16/10] relative cursor-pointer order-2 bg-gray-100 lg:order-1"
           >
             <div
               class="premium-card overflow-hidden w-full h-full rounded-xl p-6 relative"
@@ -1154,10 +1146,10 @@
 
         <!-- Project 4: Offre 360 -->
         <div
-          class="reveal-element group project-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 xl:gap-20 items-center"
+          class="reveal-element group project-card grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
         >
           <div
-            class="lg:col-span-7 overflow-hidden rounded-lg aspect-[4/3] md:aspect-[16/10] relative cursor-pointer bg-gray-100 order-2 lg:order-1"
+            class="lg:col-span-7 overflow-hidden rounded-lg aspect-[4/3] md:aspect-[16/10] relative cursor-pointer bg-gray-100 order-2 lg:order-2"
           >
             <img
               src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3be8da96-0bda-4709-8a93-52679aeb87a1_1600w.png"
@@ -1165,14 +1157,11 @@
               class="project-img w-full h-full object-cover"
             />
           </div>
-          <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-2">
+          <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-1">
             <div
               class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-accent"
             >
-              <iconify-icon
-                icon="solar:structure-linear"
-                class="text-sm"
-              ></iconify-icon>
+              <iconify-icon icon="solar:structure-linear" class="text-sm"></iconify-icon>
               <span>Architecture Produit</span>
             </div>
             <h3
@@ -1198,21 +1187,9 @@
               additionnelles simplifiées.
             </p>
             <div class="flex flex-wrap gap-2 mt-2">
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Product Design
-              </span>
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Pricing
-              </span>
-              <span
-                class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary"
-              >
-                Go-To-Market
-              </span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Product Design</span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Pricing</span>
+              <span class="px-3 py-1 bg-surface border border-line rounded-md text-[10px] font-mono uppercase text-secondary">Go-To-Market</span>
             </div>
             <a
               href="#"
@@ -1231,35 +1208,27 @@
 
     <!-- AI Assistant -->
     <section
-      class="overflow-hidden md:py-32 lg:py-40 md:px-6 text-white bg-gradient-to-r from-slate-500 to-blue-400 pt-16 pr-4 pb-16 pl-4 relative"
+      class="overflow-hidden md:py-32 md:px-6 text-white bg-gradient-to-r from-slate-500 to-blue-400 pt-20 pr-4 pb-20 pl-4 relative"
       id="ai"
     >
       <div
         class="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none opacity-10"
       ></div>
 
-      <div class="max-w-[900px] mx-auto relative z-10">
+      <div class="z-10 max-w-[900px] mr-auto ml-auto relative">
         <div class="text-center mb-12">
           <div
             class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-6"
           >
-            <span
-              class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"
-            ></span>
-            <span
-              class="font-mono text-[10px] uppercase tracking-widest text-white"
-            >
-              Assistant IA Actif
-            </span>
+            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-white">Assistant IA Actif</span>
           </div>
           <h2
             class="reveal-element text-3xl md:text-5xl font-semibold tracking-tighter mb-4 text-white"
           >
             Posez-moi vos questions
           </h2>
-          <p
-            class="reveal-element max-w-md mx-auto font-light text-sm md:text-base text-blue-50"
-          >
+          <p class="reveal-element max-w-md mx-auto font-light text-sm md:text-base text-blue-50">
             Mon assistant peut répondre sur mon parcours, mes compétences ou ma
             disponibilité.
           </p>
@@ -1269,30 +1238,220 @@
           class="reveal-element w-full bg-[#0B1120] border border-white/10 rounded-lg shadow-2xl overflow-hidden flex flex-col"
         >
           <div
-            class="bg-[#111827] px-4 py-3 flex items-center gap-4 border-b border-white/5 shrink-0"
+            class="flex shrink-0 z-20 bg-[#111827] border-white/5 border-b pt-3 pr-4 pb-3 pl-4 relative shadow-sm items-center justify-between"
           >
-            <div class="flex gap-1.5 md:gap-2">
-              <div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-              <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-              <div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+            <!-- Identity Section -->
+            <div class="flex items-center gap-3">
+              <div class="relative group cursor-help">
+                <div
+                  class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-300"
+                ></div>
+                <div
+                  class="relative w-8 h-8 rounded-full bg-[#1e293b] flex items-center justify-center border border-white/10 overflow-hidden"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1629946832022-c327f74956e0?w=100&amp;q=80"
+                    alt="AI"
+                    class="w-full h-full object-cover opacity-80"
+                  />
+                </div>
+                <div
+                  class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#111827] rounded-full flex items-center justify-center"
+                >
+                  <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <h3
+                  class="text-sm font-medium text-gray-100 tracking-tight leading-none flex items-center gap-2"
+                >
+                  Melvyn AI
+                  <span
+                    class="px-1.5 py-0.5 rounded text-[9px] bg-blue-500/10 text-blue-400 font-mono border border-blue-500/20"
+                  >
+                    BETA
+                  </span>
+                </h3>
+                <span class="text-[10px] text-gray-500 font-medium mt-0.5">
+                  Répond à vos questions
+                </span>
+              </div>
             </div>
-            <div class="flex-1 text-center font-mono text-[10px] text-gray-500">
-              melvyn-bot — zsh — 80x24
+
+            <!-- Actions -->
+            <div class="flex items-center gap-1">
+              <button
+                onclick="window.resetChat()"
+                class="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-md transition-colors group"
+                title="Réinitialiser"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="group-hover:rotate-180 transition-transform duration-500"
+                >
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"></path>
+                  <path d="M3 3v9h9"></path>
+                </svg>
+              </button>
             </div>
+
+            <!-- Injected Logic -->
+            <script>
+              // Initialize Chat Knowledge Base
+              window.initKnowledge = function() {
+                  if(window.kb) return;
+                  window.kb = [];
+                  document.querySelectorAll('section').forEach(el => {
+                      const title = el.querySelector('h1, h2, h3')?.innerText || 'Général';
+                      window.kb.push({ type: 'section', title: title, text: el.innerText.replace(/\s+/g, ' ').trim() });
+                  });
+                  document.querySelectorAll('.project-card').forEach(el => {
+                      const title = el.querySelector('h3')?.innerText || 'Projet';
+                      window.kb.push({ type: 'project', title: title, text: el.innerText.replace(/\s+/g, ' ').trim() });
+                  });
+              };
+
+              window.resetChat = function() {
+                  const term = document.getElementById('terminal-output');
+                  if(term) {
+                      term.innerHTML = '';
+                      const initMsg = `
+                          <div class="text-blue-400 mb-2">
+                            <span class="text-green-400">➜</span>
+                            ~ System initialized. Bienvenue.
+                          </div>
+                          <div class="text-gray-300">
+                            Je suis prêt. Posez-moi une question pour commencer.
+                          </div>
+                      `;
+                      term.innerHTML = initMsg;
+                  }
+              };
+
+              window.addBotMessage = function(htmlContent) {
+                  const term = document.getElementById('terminal-output');
+                  const msg = `
+                      <div class="w-full flex justify-start mb-6">
+                          <div class="flex flex-col gap-1 max-w-[90%]">
+                              <div class="flex items-center gap-2 ml-1 mb-0.5">
+                                   <span class="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">Melvyn AI</span>
+                              </div>
+                              <div class="bg-[#1f2937] text-gray-200 px-4 py-3 rounded-2xl rounded-tl-sm text-sm font-sans shadow-md border border-white/5 leading-relaxed">
+                                 ${htmlContent}
+                              </div>
+                          </div>
+                      </div>`;
+                  term.insertAdjacentHTML('beforeend', msg);
+                  term.scrollTop = term.scrollHeight;
+              };
+
+              window.addUserMessage = function(text) {
+                  const term = document.getElementById('terminal-output');
+                  const msg = `
+                      <div class="w-full flex justify-end mb-4">
+                          <div class="bg-blue-600 text-white px-4 py-2.5 rounded-2xl rounded-tr-sm max-w-[85%] text-sm font-sans shadow-lg shadow-blue-900/20 leading-relaxed border border-blue-500/50">
+                              ${text}
+                          </div>
+                      </div>`;
+                  term.insertAdjacentHTML('beforeend', msg);
+                  term.scrollTop = term.scrollHeight;
+              };
+
+              window.showTyping = function() {
+                  const term = document.getElementById('terminal-output');
+                  const id = 'typing-'+Date.now();
+                  const msg = `
+                      <div id="${id}" class="w-full flex justify-start mb-4">
+                          <div class="bg-[#1f2937] border border-white/5 px-4 py-3 rounded-2xl rounded-tl-sm flex items-center gap-1.5 w-fit">
+                              <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span>
+                              <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></span>
+                              <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+                          </div>
+                      </div>`;
+                  term.insertAdjacentHTML('beforeend', msg);
+                  term.scrollTop = term.scrollHeight;
+                  return id;
+              };
+
+              window.handleCommand = async function(cmd) {
+                  window.initKnowledge();
+                  const term = document.getElementById('terminal-output');
+
+                  window.addUserMessage(cmd);
+                  const loadId = window.showTyping();
+
+                  await new Promise(r => setTimeout(r, 600 + Math.random() * 800));
+                  document.getElementById(loadId)?.remove();
+
+                  const lower = cmd.toLowerCase();
+                  let response = "";
+                  const keywords = lower.replace(/[.,?]/g, '').split(' ').filter(w => w.length > 3);
+
+                  if(lower.match(/^(bonjour|hello|salut)/)) {
+                      response = "Bonjour ! Comment puis-je vous aider aujourd'hui ? Je connais tout sur Melvyn.";
+                  } else if (lower.includes('projets')) {
+                      response = "Melvyn a conçu plusieurs produits majeurs : <b>OptiMatch</b> (moteur d'éligibilité), l'intégration d'une <b>Plateforme SaaS</b> d'Energy Management, et <b>OptiLead</b> pour l'automatisation. Lequel souhaitez-vous explorer ?";
+                  } else if (lower.includes('expertise') || lower.includes('compétences')) {
+                      response = "Son expertise combine <b>Stratégie Produit</b> et <b>Énergie B2B</b>. Il excelle en Product Ops, Discovery, Data Analysis (Python/SQL) et transformation de services complexes en produits scalables.";
+                  } else if (lower.match(/(contact|mail|email|joindre)/)) {
+                      response = "Vous pouvez contacter Melvyn via <a href='mailto:melvyn.raymond@gmail.com' class='text-blue-400 hover:underline'>melvyn.raymond@gmail.com</a>. Il est très réactif.";
+                  } else if (lower.match(/(cv|résumé|parcours)/)) {
+                      response = "Melvyn a 7 ans d'expérience dans l'énergie B2B. Il a évolué de Business Engineer à Product Manager. Vous trouverez les détails dans la section <a href='#parcours' class='text-blue-400 hover:underline'>Parcours</a>.";
+                  } else {
+                      let best = null;
+                      let maxScore = 0;
+                      window.kb.forEach(item => {
+                          let score = 0;
+                          keywords.forEach(k => {
+                              if(item.text.toLowerCase().includes(k)) score += 2;
+                              if(item.title.toLowerCase().includes(k)) score += 5;
+                          });
+                          if(score > maxScore) { maxScore = score; best = item; }
+                      });
+
+                      if(maxScore > 0 && best) {
+                          const textLower = best.text.toLowerCase();
+                          const idx = textLower.indexOf(keywords[0]);
+                          let start = Math.max(0, idx - 60);
+                          let end = Math.min(best.text.length, idx + 250);
+                          let snippet = best.text.substring(start, end).trim();
+                          if(start > 0) snippet = "..." + snippet;
+                          if(end < best.text.length) snippet = snippet + "...";
+
+                          response = `D'après la section <b>${best.title}</b> :<br><br>"${snippet}"`;
+                      } else {
+                          response = "Je n'ai pas trouvé cette information précise sur la page. Essayez de me demander ses compétences, ses projets (comme OptiMatch) ou son expérience.";
+                      }
+                  }
+                  window.addBotMessage(response);
+              };
+
+              setTimeout(() => {
+                  window.resetChat();
+              }, 500);
+            </script>
           </div>
           <div
-            class="p-6 font-mono text-sm h-[350px] flex flex-col bg-black/40 backdrop-blur-sm"
+            class="flex flex-col text-sm font-mono bg-black/40 h-[350px] pt-6 pr-6 pb-6 pl-6 backdrop-blur-sm"
           >
             <div
               id="terminal-output"
               class="terminal-scroll space-y-3 mb-2 flex-1 overflow-y-auto"
             >
-              <div class="text-blue-400 mb-1">
+              <div class="text-blue-400 mb-2">
                 <span class="text-green-400">➜</span>
-                ~ Connexion établie. Bienvenue !
+                ~ System initialized. Bienvenue.
               </div>
-              <div class="text-gray-300 leading-relaxed">
-                Bonjour, je suis l'assistant virtuel de Melvyn. Posez-moi vos questions sur son parcours, ses projets, ses compétences ou sa disponibilité.
+              <div class="text-gray-300">
+                Je suis prêt. Posez-moi une question pour commencer.
               </div>
             </div>
             <div
@@ -1302,7 +1461,7 @@
               <span class="text-blue-400">~</span>
               <input
                 type="text"
-                class="border-none placeholder-gray-700 focus:placeholder-gray-600 text-white bg-transparent w-full outline-none"
+                class="border-none outline-none placeholder-gray-700 focus:placeholder-gray-600 text-white bg-transparent w-full"
                 placeholder="Tapez votre question..."
                 autocomplete="off"
                 id="ai-input"
@@ -1315,31 +1474,21 @@
           <button
             class="quick-prompt px-4 py-2 border border-white/20 rounded text-xs font-mono text-white transition-colors bg-white/10 hover:bg-white/20"
           >
-            "Parle-moi de tes projets"
+            "Quels sont tes projets ?"
           </button>
           <button
-            class="quick-prompt px-4 py-2 border border-white/20 rounded text-xs font-mono text-white transition-colors bg-white/10 hover:bg-white/20"
+            class="quick-prompt transition-colors hover:bg-white/20 text-xs text-white font-mono bg-white/10 border-white/20 border rounded pt-2 pr-4 pb-2 pl-4"
           >
-            "Quelles sont tes compétences ?"
-          </button>
-          <button
-            class="quick-prompt px-4 py-2 border border-white/20 rounded text-xs font-mono text-white transition-colors bg-white/10 hover:bg-white/20"
-          >
-            "Tu es disponible ?"
-          </button>
-          <button
-            class="quick-prompt px-4 py-2 border border-white/20 rounded text-xs font-mono text-white transition-colors bg-white/10 hover:bg-white/20"
-          >
-            "C'est quoi OptiMatch ?"
+            "Quelle est ton expertise ?"
           </button>
         </div>
       </div>
     </section>
 
     <!-- Career Timeline -->
-    <section class="md:px-8 md:py-32 lg:py-40 pt-16 pr-4 pb-16 pl-4" id="parcours">
+    <section class="md:px-8 md:py-32 pt-20 pr-4 pb-20 pl-4" id="parcours">
       <div
-        class="grid grid-cols-1 md:grid-cols-2 md:gap-24 xl:gap-32 max-w-[1200px] mr-auto ml-auto gap-x-12 gap-y-12"
+        class="grid grid-cols-1 md:grid-cols-2 md:gap-24 max-w-[1200px] mr-auto ml-auto gap-x-12 gap-y-12"
       >
         <div class="relative">
           <div class="md:sticky md:top-32">
@@ -1349,81 +1498,44 @@
               Parcours
             </h2>
             <div class="w-16 h-1 bg-accent mb-8"></div>
-            <p
-              class="reveal-element text-secondary text-base md:text-lg leading-relaxed mb-8"
-            >
+            <p class="reveal-element text-secondary text-base md:text-lg leading-relaxed mb-8">
               Expertise hybride entre business et produit. 7 ans d'expérience
               dans le secteur de l'énergie, de la vente terrain à la stratégie
               produit.
             </p>
 
             <!-- Certification PSPO -->
-            <div
-              class="reveal-element p-6 bg-surface rounded-xl border border-line mb-4"
-            >
-              <h4
-                class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3"
-              >
-                Certification
-              </h4>
+            <div class="reveal-element p-6 bg-surface rounded-xl border border-line mb-4">
+              <h4 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Certification</h4>
               <div class="flex items-center gap-3">
-                <iconify-icon
-                  icon="solar:diploma-verified-linear"
-                  class="text-2xl text-primary"
-                ></iconify-icon>
+                <iconify-icon icon="solar:diploma-verified-linear" class="text-2xl text-primary"></iconify-icon>
                 <div>
-                  <p class="font-semibold text-sm text-primary">
-                    PSPO I - Professional Scrum Product Owner
-                  </p>
+                  <p class="font-semibold text-sm text-primary">PSPO I - Professional Scrum Product Owner</p>
                   <p class="text-xs text-secondary">Scrum.org</p>
                 </div>
               </div>
             </div>
 
             <!-- Certification Harvard -->
-            <div
-              class="reveal-element p-6 bg-surface rounded-xl border border-line mb-4"
-            >
-              <h4
-                class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3"
-              >
-                Certification
-              </h4>
+            <div class="reveal-element p-6 bg-surface rounded-xl border border-line mb-4">
+              <h4 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Certification</h4>
               <div class="flex items-center gap-3">
-                <iconify-icon
-                  icon="solar:bolt-circle-linear"
-                  class="text-2xl text-primary"
-                ></iconify-icon>
+                <iconify-icon icon="solar:bolt-circle-linear" class="text-2xl text-primary"></iconify-icon>
                 <div>
-                  <p class="font-semibold text-sm text-primary">
-                    Energy Within Environmental Constraints
-                  </p>
+                  <p class="font-semibold text-sm text-primary">Energy Within Environmental Constraints</p>
                   <p class="text-secondary text-xs">Harvard University</p>
                 </div>
               </div>
             </div>
 
             <!-- Formation Master -->
-            <div
-              class="reveal-element p-6 bg-surface rounded-xl border border-line"
-            >
-              <h4
-                class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3"
-              >
-                Formation
-              </h4>
+            <div class="reveal-element p-6 bg-surface rounded-xl border border-line">
+              <h4 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Formation</h4>
               <div class="flex items-center gap-3">
-                <iconify-icon
-                  icon="solar:square-academic-cap-linear"
-                  class="text-2xl text-primary"
-                ></iconify-icon>
+                <iconify-icon icon="solar:square-academic-cap-linear" class="text-2xl text-primary"></iconify-icon>
                 <div>
-                  <p class="font-semibold text-sm text-primary">
-                    Master Negotiation &amp; Sales Management
-                  </p>
-                  <p class="text-secondary text-xs">
-                    EM Strasbourg Business School
-                  </p>
+                  <p class="font-semibold text-sm text-primary">Master Negotiation &amp; Sales Management</p>
+                  <p class="text-secondary text-xs">EM Strasbourg Business School</p>
                 </div>
               </div>
             </div>
@@ -1433,190 +1545,80 @@
         <div class="border-line md:pl-12 md:mt-0 border-l mt-4 pl-8 space-y-16">
           <!-- Poste actuel - PM -->
           <div class="reveal-element relative group">
-            <div
-              class="absolute -left-[2.35rem] md:-left-[3.35rem] top-2 w-3 h-3 bg-white border-2 border-accent rounded-full z-10 group-hover:bg-accent transition-colors"
-            ></div>
+            <div class="absolute -left-[2.35rem] md:-left-[3.35rem] top-2 w-3 h-3 bg-white border-2 border-accent rounded-full z-10 group-hover:bg-accent transition-colors"></div>
             <div class="flex items-center gap-2 mb-1">
-              <h3
-                class="md:text-2xl text-primary text-xl font-semibold tracking-tight"
-              >
-                Product Manager Energy
-              </h3>
-              <span
-                class="px-2 py-0.5 text-[9px] font-mono uppercase bg-green-100 text-green-700 rounded-full"
-              >
-                Actuel
-              </span>
+              <h3 class="md:text-2xl text-primary text-xl font-semibold tracking-tight">Product Manager Energy</h3>
+              <span class="px-2 py-0.5 text-[9px] font-mono uppercase bg-green-100 text-green-700 rounded-full">Actuel</span>
             </div>
-            <p
-              class="text-accent uppercase text-xs tracking-wider font-mono mt-1 mb-4"
-            >
-              Optima Énergie · 2025 - Présent
-            </p>
-            <ul
-              class="space-y-3 text-secondary list-disc pl-4 text-sm md:text-base marker:text-gray-300"
-            >
+            <p class="text-accent uppercase text-xs tracking-wider font-mono mt-1 mb-4">Optima Énergie · 2025 - Présent</p>
+            <ul class="space-y-3 text-secondary list-disc pl-4 text-sm md:text-base marker:text-gray-300">
               <li>Lancement d'une offre Energy Management SaaS.</li>
-              <li>
-                Conception d'outils d'aide à la décision (OptiLead, OptiMatch).
-              </li>
+              <li>Conception d'outils d'aide à la décision (OptiLead, OptiMatch).</li>
               <li>Structuration de l'Offre 360 modulaire.</li>
             </ul>
           </div>
 
           <!-- Transition - Partenariats -->
           <div class="reveal-element relative group">
-            <div
-              class="absolute -left-[2.35rem] md:-left-[3.35rem] top-2 w-3 h-3 bg-white border-2 border-gray-300 rounded-full z-10 group-hover:border-accent transition-colors"
-            ></div>
-            <h3
-              class="md:text-2xl text-primary text-xl font-semibold tracking-tight"
-            >
-              Responsable Partenariats
-            </h3>
-            <p
-              class="font-mono text-xs text-secondary mt-1 mb-4 uppercase tracking-wider"
-            >
-              Optima Énergie · 2024 - 2025
-            </p>
-            <ul
-              class="space-y-3 text-secondary list-disc pl-4 text-sm md:text-base marker:text-gray-300"
-            >
-              <li>
-                Création &amp; déploiement du pôle Partenariats.
-              </li>
+            <div class="absolute -left-[2.35rem] md:-left-[3.35rem] top-2 w-3 h-3 bg-white border-2 border-gray-300 rounded-full z-10 group-hover:border-accent transition-colors"></div>
+            <h3 class="md:text-2xl text-primary text-xl font-semibold tracking-tight">Responsable Partenariats</h3>
+            <p class="font-mono text-xs text-secondary mt-1 mb-4 uppercase tracking-wider">Optima Énergie · 2024 - 2025</p>
+            <ul class="space-y-3 text-secondary list-disc pl-4 text-sm md:text-base marker:text-gray-300">
+              <li>Création &amp; déploiement du pôle Partenariats.</li>
               <li>Animation d'un réseau de 1300+ adhérents.</li>
             </ul>
           </div>
 
           <!-- Parcours Commercial regroupé -->
           <div class="reveal-element relative group">
-            <div
-              class="absolute -left-[2.35rem] md:-left-[3.35rem] top-2 w-3 h-3 bg-white border-2 border-gray-300 rounded-full z-10 group-hover:border-accent transition-colors"
-            ></div>
-            <h3
-              class="md:text-2xl text-primary text-xl font-semibold tracking-tight"
-            >
-              Business Engineer B2B
-            </h3>
-            <p
-              class="font-mono text-xs text-secondary mt-1 mb-4 uppercase tracking-wider"
-            >
-              ENGIE · Dalkia · EDF · 2017 - 2024
-            </p>
-            <ul
-              class="space-y-3 text-secondary list-disc pl-4 text-sm md:text-base marker:text-gray-300"
-            >
+            <div class="absolute -left-[2.35rem] md:-left-[3.35rem] top-2 w-3 h-3 bg-white border-2 border-gray-300 rounded-full z-10 group-hover:border-accent transition-colors"></div>
+            <h3 class="md:text-2xl text-primary text-xl font-semibold tracking-tight">Business Engineer B2B</h3>
+            <p class="font-mono text-xs text-secondary mt-1 mb-4 uppercase tracking-wider">ENGIE · Dalkia · EDF · 2017 - 2024</p>
+            <ul class="space-y-3 text-secondary list-disc pl-4 text-sm md:text-base marker:text-gray-300">
               <li>7 ans de vente complexe dans l'énergie B2B.</li>
-              <li>
-                Réseaux de chaleur, énergies renouvelables, grands comptes.
-              </li>
-              <li>
-                Compréhension fine des cycles de vente et besoins terrain.
-              </li>
+              <li>Réseaux de chaleur, énergies renouvelables, grands comptes.</li>
+              <li>Compréhension fine des cycles de vente et besoins terrain.</li>
             </ul>
           </div>
 
           <!-- Ticker Section -->
-          <div
-            class="reveal-element relative pt-8 mt-12 border-t border-gray-100"
-          >
+          <div class="reveal-element relative pt-8 mt-12 border-t border-gray-100">
             <div class="mb-6 text-center">
-              <p
-                class="uppercase text-[10px] text-secondary font-medium tracking-widest font-mono"
-              >
-                Ils m'ont fait confiance
-              </p>
+              <p class="uppercase text-[10px] text-secondary font-medium tracking-widest font-mono">Ils m'ont fait confiance</p>
             </div>
 
             <div class="overflow-hidden relative w-full">
               <div class="ticker-track flex gap-20 items-center w-max">
                 <div class="flex gap-20 shrink-0 items-center">
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#00AAFF] transition-colors duration-300 cursor-default"
-                  >
-                    ENGIE
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#E30613] transition-colors duration-300 cursor-default"
-                  >
-                    DALKIA
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#FF5C00] transition-colors duration-300 cursor-default"
-                  >
-                    EDF
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#1A3A6E] transition-colors duration-300 cursor-default"
-                  >
-                    Optima Énergie
-                  </span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#00AAFF] transition-colors duration-300 cursor-default">ENGIE</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#E30613] transition-colors duration-300 cursor-default">DALKIA</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#FF5C00] transition-colors duration-300 cursor-default">EDF</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#1A3A6E] transition-colors duration-300 cursor-default">Optima Énergie</span>
                 </div>
-
                 <div class="flex gap-20 shrink-0 items-center">
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#00AAFF] transition-colors duration-300 cursor-default"
-                  >
-                    ENGIE
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#E30613] transition-colors duration-300 cursor-default"
-                  >
-                    DALKIA
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#FF5C00] transition-colors duration-300 cursor-default"
-                  >
-                    EDF
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#1A3A6E] transition-colors duration-300 cursor-default"
-                  >
-                    Optima Énergie
-                  </span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#00AAFF] transition-colors duration-300 cursor-default">ENGIE</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#E30613] transition-colors duration-300 cursor-default">DALKIA</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#FF5C00] transition-colors duration-300 cursor-default">EDF</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#1A3A6E] transition-colors duration-300 cursor-default">Optima Énergie</span>
                 </div>
-
                 <div class="flex gap-20 shrink-0 items-center">
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#00AAFF] transition-colors duration-300 cursor-default"
-                  >
-                    ENGIE
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#E30613] transition-colors duration-300 cursor-default"
-                  >
-                    DALKIA
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#FF5C00] transition-colors duration-300 cursor-default"
-                  >
-                    EDF
-                  </span>
-                  <span
-                    class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#1A3A6E] transition-colors duration-300 cursor-default"
-                  >
-                    Optima Énergie
-                  </span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#00AAFF] transition-colors duration-300 cursor-default">ENGIE</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#E30613] transition-colors duration-300 cursor-default">DALKIA</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#FF5C00] transition-colors duration-300 cursor-default">EDF</span>
+                  <span class="text-3xl font-bold tracking-tight text-gray-300 hover:text-[#1A3A6E] transition-colors duration-300 cursor-default">Optima Énergie</span>
                 </div>
               </div>
             </div>
 
             <style>
               @keyframes ticker {
-                0% {
-                  transform: translateX(0);
-                }
-                100% {
-                  transform: translateX(-33.33%);
-                }
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-33.33%); }
               }
-
               .ticker-track {
                 animation: ticker 25s linear infinite;
                 width: max-content;
               }
-
               .ticker-track:hover {
                 animation-play-state: paused;
               }
@@ -1628,172 +1630,218 @@
 
     <!-- Contact Section -->
     <footer
-      class="md:px-6 lg:px-8 bg-white pt-0 pr-4 pb-6 pl-4 relative z-30"
+      class="md:px-6 z-30 bg-white pt-0 pr-4 pb-6 pl-4 relative"
       id="contact"
     >
       <div
-        class="relative max-w-[1400px] mx-auto rounded-[32px] bg-[#0F172A] text-white overflow-hidden shadow-2xl"
+        class="relative max-w-[1400px] mx-auto rounded-[32px] bg-[#020617] text-white overflow-hidden shadow-2xl border border-white/5 ring-1 ring-white/5"
       >
         <!-- Grain & Gradients -->
-        <div class="absolute inset-0 pointer-events-none select-none">
+        <div class="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          <div class="absolute inset-0 bg-[#020617]"></div>
           <div
-            class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] opacity-50 mix-blend-screen transform translate-x-1/3 -translate-y-1/3"
+            class="absolute inset-0 opacity-20 animate-aurora"
+            style="background: radial-gradient(circle at 0% 0%, #1e3a8a 0%, transparent 50%), radial-gradient(circle at 100% 0%, #172554 0%, transparent 50%), radial-gradient(circle at 100% 100%, #1e40af 0%, transparent 50%), radial-gradient(circle at 0% 100%, #0f172a 0%, transparent 50%); filter: blur(60px);"
           ></div>
+          <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900/20 rounded-full blur-[80px] mix-blend-screen animate-float-slow"></div>
+          <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-slate-800/20 rounded-full blur-[100px] mix-blend-screen animate-float-slow" style="animation-delay: -4s;"></div>
           <div
-            class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[100px] opacity-50 mix-blend-screen transform -translate-x-1/3 translate-y-1/3"
-          ></div>
-          <div
-            class="absolute inset-0 opacity-[0.03]"
-            style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);"
+            class="absolute inset-0 opacity-[0.03] mix-blend-overlay"
+            style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E');"
           ></div>
         </div>
 
-        <div
-          class="relative z-10 px-8 py-16 md:p-20 flex flex-col justify-between min-h-[500px]"
-        >
-          <!-- Top Content -->
-          <div
-            class="flex flex-col md:flex-row justify-between items-start gap-12 mb-20 reveal-element"
-          >
-            <div class="max-w-2xl">
-              <div
-                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
-              >
+        <div class="flex flex-col min-h-[500px] md:p-20 z-10 pt-16 pr-8 pb-16 pl-8 relative justify-between">
+          <!-- Top Section -->
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-24 reveal-element">
+            <div class="max-w-3xl">
+              <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 hover:bg-white/10 transition-colors cursor-default">
                 <span class="relative flex h-2 w-2">
-                  <span
-                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
-                  ></span>
-                  <span
-                    class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
-                  ></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span
-                  class="font-mono text-[11px] uppercase tracking-widest text-green-400 font-medium"
-                >
-                  Disponible pour opportunités
-                </span>
+                <span class="font-mono text-[11px] uppercase tracking-widest text-emerald-400 font-medium">Disponible pour opportunités</span>
               </div>
-              <h2
-                class="md:text-6xl lg:text-7xl leading-[0.9] text-4xl font-semibold text-white tracking-tighter"
-              >
+
+              <h2 class="text-4xl md:text-7xl font-medium tracking-tighter text-white leading-[0.95]">
                 Concrétisons
                 <br />
-                <span class="text-gray-400">vos projets.</span>
+                <span class="text-gray-500">vos ambitions.</span>
               </h2>
             </div>
 
-            <div class="flex flex-col gap-4">
+            <!-- CTA Area -->
+            <div class="flex flex-col gap-4 shrink-0">
               <a
                 href="mailto:melvyn.raymond@gmail.com"
-                class="group relative overflow-hidden inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-primary rounded-full font-bold text-sm uppercase tracking-wider hover:bg-gray-100 transition-all duration-300"
+                class="animated-btn group relative inline-flex items-center justify-center gap-3 uppercase text-sm font-semibold tracking-wider text-white rounded-full pt-4 pr-8 pb-4 pl-8 overflow-hidden"
               >
-                <span class="relative z-10">Me contacter</span>
+                <div class="points_wrapper">
+                  <i class="point"></i>
+                  <i class="point"></i>
+                  <i class="point"></i>
+                  <i class="point"></i>
+                  <i class="point"></i>
+                  <i class="point"></i>
+                  <i class="point"></i>
+                  <i class="point"></i>
+                  <i class="point"></i>
+                  <i class="point"></i>
+                </div>
+                <span class="relative z-10">Démarrer un projet</span>
                 <iconify-icon
                   icon="solar:arrow-right-up-linear"
-                  class="relative z-10 text-lg transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  class="relative z-10 text-lg transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                 ></iconify-icon>
+                <style>
+                  .animated-btn {
+                      background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(34, 211, 238, 0.8) 0%, rgba(34, 211, 238, 0) 10%), linear-gradient(0deg, #2563eb, #2563eb);
+                      border: none;
+                      outline: none;
+                  }
+                  .animated-btn::before,
+                  .animated-btn::after {
+                      content: "";
+                      position: absolute;
+                      transition: all 0.5s ease-in-out;
+                      z-index: 0;
+                      border-radius: 9999px;
+                  }
+                  .animated-btn::before {
+                      inset: 1px;
+                      background: linear-gradient(177.95deg, rgba(255, 255, 255, 0.19) 0%, rgba(255, 255, 255, 0) 100%);
+                  }
+                  .animated-btn::after {
+                      inset: 2px;
+                      background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(34, 211, 238, 0.8) 0%, rgba(34, 211, 238, 0) 100%), linear-gradient(0deg, #2563eb, #2563eb);
+                  }
+                  .animated-btn:hover::before { opacity: 0.8; }
+                  .animated-btn:active { transform: scale(0.95); }
+                  .points_wrapper {
+                      overflow: hidden;
+                      width: 100%;
+                      height: 100%;
+                      pointer-events: none;
+                      position: absolute;
+                      top: 0; left: 0;
+                      z-index: 1;
+                      border-radius: 9999px;
+                  }
+                  .points_wrapper .point {
+                      bottom: -10px;
+                      position: absolute;
+                      animation: floating-points infinite ease-in-out;
+                      pointer-events: none;
+                      width: 2px;
+                      height: 2px;
+                      background-color: #fff;
+                      border-radius: 9999px;
+                  }
+                  @keyframes floating-points {
+                      0% { transform: translateY(0); }
+                      85% { opacity: 0; }
+                      100% { transform: translateY(-55px); opacity: 0; }
+                  }
+                  .points_wrapper .point:nth-child(1) { left: 10%; opacity: 1; animation-duration: 2.35s; animation-delay: 0.2s; }
+                  .points_wrapper .point:nth-child(2) { left: 30%; opacity: 0.7; animation-duration: 2.5s; animation-delay: 0.5s; }
+                  .points_wrapper .point:nth-child(3) { left: 25%; opacity: 0.8; animation-duration: 2.2s; animation-delay: 0.1s; }
+                  .points_wrapper .point:nth-child(4) { left: 44%; opacity: 0.6; animation-duration: 2.05s; }
+                  .points_wrapper .point:nth-child(5) { left: 50%; opacity: 1; animation-duration: 1.9s; }
+                  .points_wrapper .point:nth-child(6) { left: 75%; opacity: 0.5; animation-duration: 1.5s; animation-delay: 1.5s; }
+                  .points_wrapper .point:nth-child(7) { left: 88%; opacity: 0.9; animation-duration: 2.2s; animation-delay: 0.2s; }
+                  .points_wrapper .point:nth-child(8) { left: 58%; opacity: 0.8; animation-duration: 2.25s; animation-delay: 0.2s; }
+                  .points_wrapper .point:nth-child(9) { left: 98%; opacity: 0.6; animation-duration: 2.6s; animation-delay: 0.1s; }
+                  .points_wrapper .point:nth-child(10) { left: 65%; opacity: 1; animation-duration: 2.5s; animation-delay: 0.2s; }
+                </style>
               </a>
-              <p
-                class="text-center text-gray-500 text-xs font-mono uppercase tracking-widest"
-              >
-                Réponse sous 24h
-              </p>
+              <div class="flex items-center justify-center gap-2 opacity-60">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <p class="text-gray-400 text-[10px] font-mono uppercase tracking-widest">Réponse sous 24h</p>
+              </div>
             </div>
           </div>
 
-          <!-- Bottom Grid -->
-          <div
-            class="grid grid-cols-1 md:grid-cols-12 gap-10 border-t border-white/10 pt-10 reveal-element"
-          >
-            <!-- Contact Details -->
-            <div class="md:col-span-5">
-              <p
-                class="font-mono text-[10px] uppercase tracking-widest text-gray-500 mb-4"
-              >
-                Coordonnées
-              </p>
-              <a
-                href="mailto:melvyn.raymond@gmail.com"
-                class="block text-xl md:text-2xl text-white font-medium tracking-tight hover:text-accent transition-colors mb-2"
-              >
-                melvyn.raymond@gmail.com
-              </a>
-              <p class="text-gray-400 text-sm">
-                Basé à Biarritz, France (Remote Friendly)
+          <!-- Divider -->
+          <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12"></div>
+
+          <!-- Bottom Section -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 reveal-element">
+            <!-- Column 1: Identity -->
+            <div class="md:col-span-5 flex flex-col gap-6">
+              <div class="flex items-center gap-4">
+                <img
+                  src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png"
+                  alt="Melvyn"
+                  class="w-14 h-14 rounded-full border border-white/10 grayscale hover:grayscale-0 transition-all duration-500 object-cover"
+                />
+                <div>
+                  <h3 class="text-white font-medium text-lg tracking-tight">Melvyn Raymond</h3>
+                  <p class="text-gray-500 text-sm">Product Manager</p>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <p class="font-mono text-[10px] uppercase tracking-widest text-gray-600 mb-2">Contact</p>
+                <a
+                  href="mailto:melvyn.raymond@gmail.com"
+                  class="text-xl md:text-2xl text-gray-300 hover:text-white transition-colors tracking-tight font-medium block"
+                >
+                  melvyn.raymond@gmail.com
+                </a>
+              </div>
+              <p class="text-gray-500 text-sm flex items-center gap-2 pt-2">
+                <iconify-icon icon="solar:map-point-linear" class="text-gray-400"></iconify-icon>
+                Biarritz, France (Remote Friendly)
               </p>
             </div>
 
-            <!-- Sitemap -->
-            <div class="md:col-span-3">
-              <p
-                class="font-mono text-[10px] uppercase tracking-widest text-gray-500 mb-4"
-              >
-                Menu
-              </p>
-              <ul class="space-y-3">
+            <!-- Column 2: Navigation -->
+            <div class="md:col-span-3 md:col-start-7">
+              <p class="font-mono text-[10px] uppercase tracking-widest text-gray-600 mb-6">Exploration</p>
+              <ul class="space-y-4">
                 <li>
-                  <a
-                    href="#about"
-                    class="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
+                  <a href="#about" class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="w-1 h-1 bg-white/0 rounded-full group-hover:bg-white transition-colors"></span>
                     À propos
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#work"
-                    class="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
+                  <a href="#work" class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="w-1 h-1 bg-white/0 rounded-full group-hover:bg-white transition-colors"></span>
                     Projets
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#parcours"
-                    class="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
+                  <a href="#parcours" class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="w-1 h-1 bg-white/0 rounded-full group-hover:bg-white transition-colors"></span>
                     Parcours
                   </a>
                 </li>
               </ul>
             </div>
 
-            <!-- Socials -->
-            <div class="md:col-span-4 flex flex-col justify-between">
+            <!-- Column 3: Socials & Legal -->
+            <div class="md:col-span-3 md:col-start-10 flex flex-col justify-between h-full gap-8">
               <div>
-                <p
-                  class="font-mono text-[10px] uppercase tracking-widest text-gray-500 mb-4"
-                >
-                  Réseaux
-                </p>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-gray-600 mb-6">Réseaux</p>
                 <div class="flex gap-3">
                   <a
                     href="https://www.linkedin.com/in/melvyn-raymond"
                     target="_blank"
-                    class="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all duration-300"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:bg-white hover:text-black hover:scale-110 transition-all duration-300 group"
                   >
-                    <iconify-icon
-                      icon="brandico:linkedin"
-                      class="text-lg"
-                    ></iconify-icon>
+                    <iconify-icon icon="brandico:linkedin" class="text-lg group-hover:scale-110 transition-transform"></iconify-icon>
                   </a>
                   <a
                     href="#"
-                    class="flex items-center justify-center hover:bg-white hover:text-primary transition-all duration-300 text-white bg-white/5 w-10 h-10 border-white/10 border rounded-full"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:bg-white hover:text-black hover:scale-110 transition-all duration-300 group"
                   >
-                    <iconify-icon
-                      icon="brandico:twitter-bird"
-                      class="text-lg"
-                    ></iconify-icon>
+                    <iconify-icon icon="brandico:twitter-bird" class="text-lg group-hover:scale-110 transition-transform"></iconify-icon>
                   </a>
                 </div>
               </div>
-
-              <div class="mt-8 md:mt-0 md:text-right">
-                <p
-                  class="text-[10px] text-gray-600 font-mono uppercase tracking-widest"
-                >
-                  &copy; 2026 Melvyn Raymond. All rights reserved.
+              <div class="md:text-right">
+                <p class="text-[10px] text-gray-700 font-mono uppercase tracking-widest leading-relaxed">
+                  © 2026 Melvyn Raymond. All rights reserved.
                 </p>
               </div>
             </div>
@@ -1917,141 +1965,16 @@
       const aiInput = document.getElementById('ai-input');
       const termOut = document.getElementById('terminal-output');
 
-      async function handleCommand(cmd) {
-          termOut.innerHTML += `<div class="mt-2"><span class="text-green-400">➜</span> <span class="text-white">${cmd}</span></div>`;
-          const loadId = 'l-'+Date.now();
-          termOut.innerHTML += `<div id="${loadId}" class="text-gray-500 italic text-xs animate-pulse">Analyse en cours...</div>`;
-          termOut.scrollTop = termOut.scrollHeight;
-
-          await new Promise(r => setTimeout(r, 600 + Math.random() * 600));
-          document.getElementById(loadId)?.remove();
-
-          const lCmd = cmd.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-          let resp = "";
-
-          // --- Greetings ---
-          if(lCmd.match(/^(bonjour|hello|salut|hey|coucou|bonsoir|yo)/)) {
-              const greetings = [
-                  "Bonjour ! Ravi de vous accueillir ici. Je peux vous renseigner sur le parcours de Melvyn, ses projets ou ses compétences. Qu'est-ce qui vous intéresse ?",
-                  "Salut ! Comment puis-je vous aider ? N'hésitez pas à me poser des questions sur l'expérience de Melvyn, ses réalisations ou sa disponibilité.",
-                  "Hello ! Bienvenue. Je suis là pour répondre à toutes vos questions sur Melvyn. Par quoi souhaitez-vous commencer ?"
-              ];
-              resp = greetings[Math.floor(Math.random() * greetings.length)];
-          }
-          // --- Thanks ---
-          else if(lCmd.match(/(merci|thanks|thank you|cool|super|genial|parfait)/)) {
-              const thanks = [
-                  "Avec plaisir ! Si vous avez d'autres questions, je suis là. 😊",
-                  "De rien ! N'hésitez pas à explorer d'autres sujets — projets, compétences, disponibilité...",
-                  "Je vous en prie. Bonne continuation et à bientôt !"
-              ];
-              resp = thanks[Math.floor(Math.random() * thanks.length)];
-          }
-          // --- OptiMatch ---
-          else if(lCmd.match(/(optimatch|eligibilit|moteur)/)) {
-              resp = "<b>OptiMatch</b> est un moteur d'éligibilité que Melvyn a conçu de A à Z. L'idée : permettre aux commerciaux de vérifier instantanément si un prospect est éligible à une offre, en croisant des données techniques (compteurs, puissance, consommation) avec les règles métier. Résultat : le temps de qualification est passé de plusieurs heures à quelques secondes, et le taux de conversion a significativement augmenté. C'est un projet dont il est particulièrement fier.";
-          }
-          // --- OptiLead ---
-          else if(lCmd.match(/(optilead|lead|qualification|prospection|automatisation)/)) {
-              resp = "<b>OptiLead</b> est un système d'automatisation de la qualification des leads. Melvyn l'a pensé pour fluidifier le parcours entre le marketing et les équipes commerciales. Le système score automatiquement les prospects entrants, les enrichit avec des données marché, et les route vers le bon interlocuteur. Ça a permis de réduire drastiquement le temps de traitement et d'améliorer la qualité des leads transmis aux commerciaux.";
-          }
-          // --- SaaS Platform ---
-          else if(lCmd.match(/(saas|plateforme|energy management|ems|supervision)/)) {
-              resp = "Melvyn a piloté l'intégration d'une <b>plateforme SaaS d'Energy Management</b> au sein de l'offre de son entreprise. L'objectif était de proposer aux clients B2B un outil de supervision et d'optimisation de leur consommation énergétique. Il a géré la roadmap produit, coordonné les équipes techniques et assuré l'alignement avec les besoins métier des clients.";
-          }
-          // --- Projects (general) ---
-          else if(lCmd.match(/(projet|realisation|portfolio|travaux)/)) {
-              resp = "Melvyn a mené plusieurs projets structurants :<br><br>• <b>OptiMatch</b> — un moteur d'éligibilité qui automatise la vérification des offres pour les commerciaux.<br>• <b>Plateforme SaaS</b> — intégration d'un outil d'Energy Management pour les clients B2B.<br>• <b>OptiLead</b> — automatisation de la qualification et du routage des leads.<br><br>Chacun de ces projets a eu un impact mesurable sur la performance commerciale. Vous voulez creuser l'un d'entre eux ?";
-          }
-          // --- Skills / Competences ---
-          else if(lCmd.match(/(competence|skill|savoir|maitr|expertise|fort)/)) {
-              resp = "Les compétences clés de Melvyn s'articulent autour de plusieurs axes :<br><br>• <b>Stratégie Produit</b> — Vision, roadmap, priorisation, OKRs<br>• <b>Product Discovery</b> — Interviews utilisateurs, tests d'hypothèses, prototypage<br>• <b>Data & Analytics</b> — Python, SQL, construction de dashboards<br>• <b>Méthodologies Agile</b> — Scrum, certifié PSPO (Scrum.org)<br>• <b>Domaine métier</b> — Énergie B2B, marchés de gros, mécanismes de capacité<br><br>Ce qui le distingue, c'est sa capacité à faire le pont entre la technique et le business.";
-          }
-          // --- Experience / Parcours ---
-          else if(lCmd.match(/(experience|parcours|carriere|cv|resume|profil)/)) {
-              resp = "Melvyn cumule <b>7 ans d'expérience dans l'énergie B2B</b>. Son parcours reflète une progression logique :<br><br>• Il a débuté côté commercial comme <b>Business Engineer</b>, ce qui lui a donné une compréhension fine du terrain et des clients.<br>• Il a ensuite évolué vers un rôle de <b>Responsable Partenariats</b>, en structurant l'écosystème de distribution.<br>• Depuis 2022, il est <b>Product Manager</b>, où il conçoit des produits qui résolvent de vrais problèmes métier.<br><br>Vous pouvez consulter la section <a href='#parcours' class='text-blue-400 hover:underline'>Parcours</a> pour plus de détails.";
-          }
-          // --- Energy domain ---
-          else if(lCmd.match(/(energie|energy|b2b|marche|electricite|gaz|fourniture)/)) {
-              resp = "Le secteur de l'<b>énergie B2B</b>, c'est le fil rouge du parcours de Melvyn. Il maîtrise les mécanismes des marchés de gros (ARENH, capacité, CEE), la relation fournisseur-client, et les enjeux de transition énergétique pour les entreprises. Cette expertise sectorielle lui permet de concevoir des produits vraiment adaptés aux réalités du terrain — pas juste des features en l'air.";
-          }
-          // --- Availability ---
-          else if(lCmd.match(/(dispo|recrut|opportunit|embauche|poste|cherche|mission|freelance)/)) {
-              resp = "Oui, Melvyn est <b>actuellement ouvert à de nouvelles opportunités</b>. Il recherche un poste de Product Manager où il pourra avoir un vrai impact — idéalement dans un environnement B2B tech ou énergie. N'hésitez pas à le contacter directement à <a href='mailto:melvyn.raymond@gmail.com' class='text-blue-400 hover:underline'>melvyn.raymond@gmail.com</a> pour en discuter.";
-          }
-          // --- Contact ---
-          else if(lCmd.match(/(contact|mail|email|joindre|ecrire|appel|telephone)/)) {
-              resp = "Vous pouvez joindre Melvyn par email à <a href='mailto:melvyn.raymond@gmail.com' class='text-blue-400 hover:underline'>melvyn.raymond@gmail.com</a>. Il est généralement très réactif. Vous pouvez aussi passer par la section <a href='#contact' class='text-blue-400 hover:underline'>Contact</a> en bas de page.";
-          }
-          // --- Tools ---
-          else if(lCmd.match(/(outil|tool|techno|stack|logiciel|python|sql|jira|figma|notion)/)) {
-              resp = "Côté outils, Melvyn utilise au quotidien :<br><br>• <b>Product</b> — Jira, Confluence, Notion, Figma, Miro<br>• <b>Data</b> — Python, SQL, Metabase, Google Analytics<br>• <b>Collaboration</b> — Slack, Teams, méthodes Agile/Scrum<br><br>Il est à l'aise aussi bien sur les outils de discovery que sur l'analyse de données pour piloter ses décisions produit.";
-          }
-          // --- Certifications ---
-          else if(lCmd.match(/(certif|pspo|scrum|formation|diplome|ecole|etude)/)) {
-              resp = "Melvyn est certifié <b>PSPO (Professional Scrum Product Owner)</b> par Scrum.org. Côté formation, il a un parcours en école de commerce avec une spécialisation en énergie. Mais au-delà des diplômes, c'est surtout sur le terrain qu'il a construit son expertise — 7 ans à concevoir des produits dans un secteur exigeant.";
-          }
-          // --- Methodology ---
-          else if(lCmd.match(/(methodo|agile|discovery|delivery|sprint|backlog|roadmap|okr|prioris)/)) {
-              resp = "Melvyn travaille avec une approche <b>Dual Track Agile</b> : Discovery en continu pour valider les hypothèses produit, et Delivery en sprints pour livrer de la valeur régulièrement. Il structure ses roadmaps autour d'<b>OKRs</b> et priorise avec des frameworks comme RICE ou MoSCoW. L'objectif : toujours maximiser l'impact avec les ressources disponibles.";
-          }
-          // --- Data / Analytics ---
-          else if(lCmd.match(/(data|donnee|dashboard|analyse|metr|kpi|indicateur)/)) {
-              resp = "L'approche <b>data-driven</b> est centrale chez Melvyn. Il construit des dashboards de suivi produit, analyse les comportements utilisateurs, et utilise Python et SQL pour extraire des insights à partir de données métier. Pour lui, une bonne décision produit s'appuie toujours sur des données concrètes — pas sur des intuitions.";
-          }
-          // --- What makes him different ---
-          else if(lCmd.match(/(difference|distingue|unique|atout|force|pourquoi|valeur ajout)/)) {
-              resp = "Ce qui distingue Melvyn, c'est sa <b>double casquette business + produit</b>. Avoir commencé côté commercial lui donne une empathie naturelle pour les utilisateurs et une compréhension fine des enjeux de terrain. Il ne conçoit pas des features pour cocher des cases — il résout de vrais problèmes qui ont un impact mesurable sur le business. Et sa spécialisation dans l'énergie B2B, un secteur complexe et réglementé, ajoute une profondeur d'expertise rare.";
-          }
-          // --- Leadership / Team ---
-          else if(lCmd.match(/(equipe|team|collabor|management|leader|travail)/)) {
-              resp = "Melvyn accorde beaucoup d'importance à la <b>collaboration transverse</b>. En tant que PM, il fait le lien entre les équipes techniques, commerciales et la direction. Il anime les rituels agile, facilite les ateliers de discovery, et s'assure que tout le monde travaille vers le même objectif. Son passé commercial lui permet de parler le même langage que chaque interlocuteur.";
-          }
-          // --- AI ---
-          else if(lCmd.match(/(ia |intelligence artificielle|machine learning|chatbot|gpt|llm|ai )/)) {
-              resp = "Melvyn s'intéresse de près à l'<b>intelligence artificielle</b> et à son application dans le monde produit. Il explore comment l'IA peut enrichir l'expérience utilisateur, automatiser des tâches répétitives et créer de la valeur dans le secteur de l'énergie. D'ailleurs... vous êtes en train de discuter avec un assistant IA qu'il a intégré à son portfolio. 😉";
-          }
-          // --- Location / Remote ---
-          else if(lCmd.match(/(ou |localisation|ville|teletravail|remote|presentiel|hybride|geograph)/)) {
-              resp = "Melvyn est basé en <b>France</b> et ouvert à différentes modalités de travail — présentiel, hybride ou full remote. L'essentiel pour lui, c'est de rejoindre un projet stimulant avec une vraie ambition produit. Pour discuter des détails, contactez-le directement à <a href='mailto:melvyn.raymond@gmail.com' class='text-blue-400 hover:underline'>melvyn.raymond@gmail.com</a>.";
-          }
-          // --- Salary (redirect politely) ---
-          else if(lCmd.match(/(salaire|remuneration|tjm|tarif|combien|prix)/)) {
-              resp = "C'est une question importante, mais ce genre de discussion se fait mieux en direct. 😊 Je vous invite à contacter Melvyn à <a href='mailto:melvyn.raymond@gmail.com' class='text-blue-400 hover:underline'>melvyn.raymond@gmail.com</a> pour en discuter de manière plus personnalisée.";
-          }
-          // --- Motivation ---
-          else if(lCmd.match(/(motiv|passion|pourquoi product|aime|inspir)/)) {
-              resp = "Ce qui motive Melvyn dans le Product Management, c'est le fait de <b>transformer des problèmes complexes en solutions simples</b>. Dans l'énergie B2B, les enjeux sont techniques, réglementaires et commerciaux à la fois — et c'est justement ce qui rend le travail passionnant. Construire un produit qui fait gagner du temps à un commercial ou qui clarifie une offre pour un client, c'est très concret et gratifiant.";
-          }
-          // --- Languages ---
-          else if(lCmd.match(/(langue|anglais|english|francais|bilingue|speak)/)) {
-              resp = "Melvyn est <b>bilingue français-anglais</b> et à l'aise dans des environnements de travail internationaux. Il peut rédiger de la documentation produit, animer des réunions et collaborer avec des équipes en anglais sans aucun souci.";
-          }
-          // --- Help ---
-          else if(lCmd.match(/(aide|help|comment|quoi demander|question)/)) {
-              resp = "Voici quelques exemples de questions que vous pouvez me poser :<br><br>• \"Quels sont tes projets ?\"<br>• \"C'est quoi OptiMatch ?\"<br>• \"Quelles sont tes compétences ?\"<br>• \"Parle-moi de ton parcours\"<br>• \"Tu es disponible ?\"<br>• \"Quels outils utilises-tu ?\"<br>• \"Qu'est-ce qui te distingue ?\"<br>• \"Comment me contacter ?\"<br><br>N'hésitez pas, je fais de mon mieux pour répondre !";
-          }
-          // --- Who are you ---
-          else if(lCmd.match(/(qui es|qui etes|tu es qui|t'es qui|present)/)) {
-              resp = "Je suis l'assistant virtuel de <b>Melvyn Raymond</b>, Product Manager spécialisé en énergie B2B. Je suis ici pour vous donner un aperçu de son profil, ses réalisations et ses compétences. Bien sûr, rien ne remplace un vrai échange — mais je peux déjà répondre à pas mal de questions !";
-          }
-          // --- Fallback ---
-          else {
-              const fallbacks = [
-                  "Hmm, je n'ai pas de réponse précise pour cette question. Essayez de me demander par exemple ses <b>projets</b>, ses <b>compétences</b>, son <b>parcours</b> ou sa <b>disponibilité</b>.",
-                  "Je ne suis pas sûr de bien comprendre votre demande. Vous pouvez me poser des questions sur l'expérience de Melvyn, ses réalisations (OptiMatch, OptiLead...) ou comment le contacter.",
-                  "Bonne question, mais elle sort un peu de mon domaine ! Je suis spécialisé sur le profil de Melvyn. Essayez \"compétences\", \"projets\" ou \"disponibilité\" par exemple."
-              ];
-              resp = fallbacks[Math.floor(Math.random() * fallbacks.length)];
-          }
-
-          termOut.innerHTML += `<div class="text-gray-300 border-l-2 border-accent pl-3 py-1 my-1 leading-relaxed">${resp}</div>`;
-          termOut.scrollTop = termOut.scrollHeight;
-      }
-
       if(aiInput) {
-          aiInput.addEventListener('keydown', e => { if(e.key==='Enter'&&aiInput.value.trim()) { handleCommand(aiInput.value); aiInput.value=''; } });
-          document.querySelectorAll('.quick-prompt').forEach(b => b.addEventListener('click', () => handleCommand(b.innerText.replace(/"/g,""))));
+          aiInput.addEventListener('keydown', e => {
+              if(e.key==='Enter' && aiInput.value.trim()) {
+                  window.handleCommand(aiInput.value);
+                  aiInput.value='';
+              }
+          });
+          document.querySelectorAll('.quick-prompt').forEach(b => {
+              b.addEventListener('click', () => window.handleCommand(b.innerText.replace(/"/g,"")));
+          });
       }
 
       // Navbar Hide/Show on Scroll
@@ -2093,7 +2016,25 @@
     </script>
 
     <script>
-      const mobileBtn=document.getElementById('mobile-menu-btn');const mobileMenu=document.getElementById('mobile-menu');if(mobileBtn&&mobileMenu){const mobileLinks=mobileMenu.querySelectorAll('a');mobileBtn.addEventListener('click',(e)=>{e.stopPropagation();mobileMenu.classList.toggle('hidden');});mobileLinks.forEach(link=>{link.addEventListener('click',()=>{mobileMenu.classList.add('hidden');});});document.addEventListener('click',(e)=>{if(!mobileMenu.contains(e.target)&&!mobileBtn.contains(e.target)){mobileMenu.classList.add('hidden');}});}
+      const mobileBtn=document.getElementById('mobile-menu-btn');
+      const mobileMenu=document.getElementById('mobile-menu');
+      if(mobileBtn&&mobileMenu){
+        const mobileLinks=mobileMenu.querySelectorAll('a');
+        mobileBtn.addEventListener('click',(e)=>{
+          e.stopPropagation();
+          mobileMenu.classList.toggle('hidden');
+        });
+        mobileLinks.forEach(link=>{
+          link.addEventListener('click',()=>{
+            mobileMenu.classList.add('hidden');
+          });
+        });
+        document.addEventListener('click',(e)=>{
+          if(!mobileMenu.contains(e.target)&&!mobileBtn.contains(e.target)){
+            mobileMenu.classList.add('hidden');
+          }
+        });
+      }
     </script>
   </body>
 </html>
