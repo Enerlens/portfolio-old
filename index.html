@@ -161,6 +161,16 @@
     </style>
   </head>
   <body class="overflow-x-hidden w-full">
+    <!-- Background (component) added by Aura -->
+    <div class="aura-background-component top-0 w-full h-screen -z-10 invert saturate-0 mix-blend-normal blur-sm fixed opacity-30" data-alpha-mask="36" style="mask-image: linear-gradient(to bottom, transparent, black 0%, black 36%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 36%, transparent)">
+      <div class="aura-background-component top-0 w-full -z-10 absolute h-full">
+        <div data-us-project="UtvhDctN8AjL6tvf1yKd" class="absolute w-full h-full left-0 top-0 -z-10"></div>
+        <script type="text/javascript">
+          !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();
+        </script>
+      </div>
+    </div>
+
     <!-- Loader -->
     <div
       class="loader"
@@ -378,7 +388,7 @@
             <span
               class="font-mono text-[10px] md:text-xs uppercase tracking-widest font-semibold text-green-700"
             >
-              Disponible
+              En recherche de poste
             </span>
           </div>
 
@@ -490,7 +500,7 @@
             class="relative aspect-[16/12] md:aspect-[4/5] rounded-3xl overflow-hidden border border-white/60 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
           >
             <div
-              class="absolute top-0 right-0 bottom-0 left-0 w-full h-full rounded-3xl overflow-hidden p-[2px] z-0"
+              class="absolute top-0 right-0 bottom-0 left-0 w-full h-full rounded-3xl overflow-hidden z-0"
             >
               <span
                 class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#6366F1_50%,#E2E8F0_100%)]"
@@ -498,7 +508,7 @@
               <img
                 src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/76397c14-f815-4738-8905-52a30f93d4fe_800w.png"
                 alt="Melvyn Raymond"
-                class="relative w-full h-full object-cover rounded-[22px] bg-white block"
+                class="block bg-white w-full h-full object-cover rounded-3xl relative transition-transform duration-700 ease-spring hover:scale-105 reveal-element"
               />
             </div>
             <div
@@ -828,9 +838,9 @@
           <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-2">
             <div class="flex items-center justify-between">
               <div
-                class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-accent"
+                class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-accent"
               >
-                <iconify-icon icon="solar:bolt-circle-linear" class="text-sm"></iconify-icon>
+                <iconify-icon icon="solar:bolt-circle-linear" class="text-base"></iconify-icon>
                 <span>Moteur de décision</span>
               </div>
               <div
@@ -842,13 +852,9 @@
             <h3
               class="md:text-5xl text-primary group-hover:scale-[1.02] group-hover:tracking-tight transition-all duration-500 ease-out origin-left text-3xl font-semibold tracking-tighter"
             >
-              <span class="text-stone-300">Opti</span>
-              <span class="text-accent animate-pulse-slow inline-block">.</span>
-              <span
+              <span class="text-stone-300">Opti</span><span class="text-accent animate-pulse-slow inline-block mx-0.5">.</span><span
                 class="bg-clip-text text-transparent bg-gradient-to-br from-blue-600 to-indigo-400"
-              >
-                Match
-              </span>
+              >Match</span>
             </h3>
             <p
               class="text-secondary md:text-lg leading-relaxed text-base font-light"
@@ -882,21 +888,17 @@
         >
           <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-1">
             <div
-              class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-accent"
+              class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-accent"
             >
-              <iconify-icon icon="solar:widget-linear" class="text-sm"></iconify-icon>
+              <iconify-icon icon="solar:widget-linear" class="text-base"></iconify-icon>
               <span>Intégration SaaS</span>
             </div>
             <h3
               class="md:text-5xl text-primary group-hover:scale-[1.02] group-hover:tracking-tight transition-all duration-500 ease-out origin-left text-3xl font-semibold tracking-tighter"
             >
-              <span class="text-stone-300">Plateforme</span>
-              <span class="animate-pulse inline-block text-orange-500 mx-0.5">·</span>
-              <span
+              <span class="text-stone-300">Plateforme</span><span class="animate-pulse inline-block text-orange-500 mx-1">·</span><br/><span
                 class="bg-clip-text text-transparent bg-gradient-to-br from-orange-500 to-amber-400"
-              >
-                Management Énergétique
-              </span>
+              >Management Énergétique</span>
             </h3>
 
             <p
@@ -942,9 +944,9 @@
           <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-2">
             <div class="flex items-center justify-between">
               <div
-                class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-accent"
+                class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-accent"
               >
-                <iconify-icon icon="solar:filter-linear" class="text-sm"></iconify-icon>
+                <iconify-icon icon="solar:filter-linear" class="text-base"></iconify-icon>
                 <span>Qualification Leads</span>
               </div>
               <div
@@ -956,13 +958,9 @@
             <h3
               class="md:text-5xl text-primary group-hover:scale-[1.02] group-hover:tracking-tight transition-all duration-500 ease-out origin-left text-3xl font-semibold tracking-tighter"
             >
-              <span class="text-stone-300">Opti</span>
-              <span class="animate-pulse inline-block text-emerald-500">.</span>
-              <span
+              <span class="text-stone-300">Opti</span><span class="animate-pulse inline-block text-emerald-500 mx-0.5">.</span><span
                 class="bg-clip-text text-transparent bg-gradient-to-br from-emerald-600 to-teal-400"
-              >
-                Lead
-              </span>
+              >Lead</span>
             </h3>
             <p
               class="text-secondary text-base md:text-lg leading-relaxed font-light"
@@ -1159,21 +1157,17 @@
           </div>
           <div class="lg:col-span-5 flex flex-col gap-6 order-1 lg:order-1">
             <div
-              class="flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-accent"
+              class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-accent"
             >
-              <iconify-icon icon="solar:structure-linear" class="text-sm"></iconify-icon>
+              <iconify-icon icon="solar:structure-linear" class="text-base"></iconify-icon>
               <span>Architecture Produit</span>
             </div>
             <h3
               class="md:text-5xl text-primary group-hover:scale-[1.02] group-hover:tracking-tight transition-all duration-500 ease-out origin-left text-3xl font-semibold tracking-tighter"
             >
-              <span class="text-stone-300">Opti</span>
-              <span class="animate-pulse inline-block text-slate-400">.</span>
-              <span
+              <span class="text-stone-300">Opti</span><span class="animate-pulse inline-block text-slate-400 mx-0.5">.</span><span
                 class="bg-clip-text text-transparent bg-gradient-to-r from-slate-500 to-blue-400"
-              >
-                360
-              </span>
+              >360</span>
             </h3>
             <p
               class="text-secondary md:text-lg leading-relaxed text-base font-light"
@@ -1660,13 +1654,13 @@
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span class="font-mono text-[11px] uppercase tracking-widest text-emerald-400 font-medium">Disponible pour opportunités</span>
+                <span class="font-mono text-[11px] uppercase tracking-widest text-emerald-400 font-medium">En recherche active</span>
               </div>
 
               <h2 class="text-4xl md:text-7xl font-medium tracking-tighter text-white leading-[0.95]">
-                Concrétisons
+                Prêt pour
                 <br />
-                <span class="text-gray-500">vos ambitions.</span>
+                <span class="text-gray-500">le prochain défi.</span>
               </h2>
             </div>
 
@@ -1688,7 +1682,7 @@
                   <i class="point"></i>
                   <i class="point"></i>
                 </div>
-                <span class="relative z-10">Démarrer un projet</span>
+                <span class="relative z-10">Échangeons</span>
                 <iconify-icon
                   icon="solar:arrow-right-up-linear"
                   class="relative z-10 text-lg transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
@@ -1756,7 +1750,7 @@
               </a>
               <div class="flex items-center justify-center gap-2 opacity-60">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <p class="text-gray-400 text-[10px] font-mono uppercase tracking-widest">Réponse sous 24h</p>
+                <p class="text-gray-400 text-[10px] font-mono uppercase tracking-widest">Ouvert aux échanges</p>
               </div>
             </div>
           </div>
