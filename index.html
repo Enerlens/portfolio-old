@@ -9,7 +9,7 @@
     <meta name="google-site-verification" content="-WSLTFc2DfGk8-XsNfdDuKsls87sXJhT_8FpMXA7yNA" />
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Melvyn Raymond, Product Manager avec 7 ans d'expérience dans l'énergie B2B. Spécialisé en Product Strategy, SaaS, Product Ops et transformation digitale. Basé à Biarritz, France." />
+    <meta name="description" content="Melvyn Raymond, Product Manager avec 7 ans d'expérience dans l'énergie B2B. Spécialisé en Product Strategy, SaaS et Product Ops. Biarritz, France." />
     <meta name="author" content="Melvyn Raymond" />
     <meta name="theme-color" content="#0F172A" />
     <link rel="canonical" href="https://melvynraymond.com/" />
@@ -126,6 +126,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link rel="preconnect" href="https://hoirqrkdgbmvpwutwuwj.supabase.co" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preload" as="image" href="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
       rel="stylesheet"
@@ -212,6 +215,7 @@
 
       /* Utils */
       .text-balance { text-wrap: balance; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
       .magnetic-btn { display: inline-block; will-change: transform; }
 
       /* Loader */
@@ -321,7 +325,9 @@
               <img
                 src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png"
                 class="w-8 h-8 rounded-full border border-gray-100 object-cover"
-                alt="Melvyn"
+                alt="Melvyn Raymond"
+                width="32"
+                height="32"
               />
               <div
                 class="absolute -bottom-0.5 -right-0.5 bg-white rounded-full p-[1.5px]"
@@ -394,6 +400,7 @@
             <button
               class="inline-flex items-center justify-center rounded-full w-9 h-9 p-2 hover:bg-gray-100 text-gray-600 transition-colors"
               id="mobile-menu-btn"
+              aria-label="Ouvrir le menu de navigation"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -477,9 +484,12 @@
           <div class="mb-10 md:mb-14 opacity-0 hero-fade-in">
             <img
               src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png"
-              alt="Melvyn Logo"
+              alt="Melvyn Raymond — Product Manager Énergie B2B"
               class="w-32 h-32 object-cover border-gray-100 border rounded-full shadow-sm"
               style="object-position: center 35%;"
+              width="128"
+              height="128"
+              fetchpriority="high"
             />
           </div>
 
@@ -612,8 +622,9 @@
             <img
               src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/76397c14-f815-4738-8905-52a30f93d4fe_800w.png"
               alt="Melvyn Raymond, Product Manager Énergie B2B"
-              loading="lazy"
               decoding="async"
+              width="800"
+              height="1000"
               class="absolute inset-0 block w-full h-full object-cover z-[2] transition-transform duration-700 ease-spring hover:scale-105"
             />
             <div
@@ -1053,25 +1064,31 @@
             <div class="relative aspect-[4/3] md:aspect-[16/10] bg-gray-100 overflow-hidden">
               <img
                 src="plateforme-management.png"
-                alt="Plateforme — Bilan énergétique"
+                alt="Plateforme de Management Énergétique — Bilan énergétique SaaS B2B"
                 loading="lazy"
                 decoding="async"
+                width="1200"
+                height="750"
                 class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 ease-in-out opacity-100 scale-100"
                 data-carousel-slide
               />
               <img
                 src="screen1.png"
-                alt="Plateforme — Optimisation électrique"
+                alt="Plateforme de Management Énergétique — Optimisation électrique"
                 loading="lazy"
                 decoding="async"
+                width="1200"
+                height="750"
                 class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 ease-in-out opacity-0 scale-105"
                 data-carousel-slide
               />
               <img
                 src="screen2.jpg"
-                alt="Plateforme — Suivi Facturation"
+                alt="Plateforme de Management Énergétique — Suivi Facturation"
                 loading="lazy"
                 decoding="async"
+                width="1200"
+                height="750"
                 class="absolute inset-0 w-full h-full object-contain transition-all duration-1000 ease-in-out opacity-0 scale-105"
                 data-carousel-slide
               />
@@ -1079,9 +1096,9 @@
             <!-- Progress bar + dots -->
             <div class="bg-surface px-4 py-2 flex items-center justify-center gap-2 relative z-10 border-t border-line">
               <div class="flex items-center gap-2" id="carousel-dots">
-                <button class="w-2 h-2 rounded-full bg-accent transition-all duration-300" data-dot="0"></button>
-                <button class="w-2 h-2 rounded-full bg-line transition-all duration-300" data-dot="1"></button>
-                <button class="w-2 h-2 rounded-full bg-line transition-all duration-300" data-dot="2"></button>
+                <button class="w-2 h-2 rounded-full bg-accent transition-all duration-300" data-dot="0" aria-label="Voir la capture 1"></button>
+                <button class="w-2 h-2 rounded-full bg-line transition-all duration-300" data-dot="1" aria-label="Voir la capture 2"></button>
+                <button class="w-2 h-2 rounded-full bg-line transition-all duration-300" data-dot="2" aria-label="Voir la capture 3"></button>
               </div>
             </div>
           </div>
@@ -1304,6 +1321,8 @@
               alt="Offre 360 — Architecture produit modulaire énergie B2B"
               loading="lazy"
               decoding="async"
+              width="1600"
+              height="1000"
               class="project-img w-full h-full object-cover"
             />
           </div>
@@ -1400,6 +1419,8 @@
                     alt="Assistant IA Melvyn"
                     loading="lazy"
                     decoding="async"
+                    width="100"
+                    height="100"
                     class="w-full h-full object-cover opacity-80"
                   />
                 </div>
@@ -1607,12 +1628,14 @@
             >
               <span class="text-green-400">➜</span>
               <span class="text-blue-400">~</span>
+              <label for="ai-input" class="sr-only">Posez une question à l'assistant IA</label>
               <input
                 type="text"
                 class="border-none outline-none placeholder-gray-700 focus:placeholder-gray-600 text-white bg-transparent w-full"
                 placeholder="Tapez votre question..."
                 autocomplete="off"
                 id="ai-input"
+                aria-label="Posez une question à l'assistant IA"
               />
             </div>
           </div>
@@ -1669,7 +1692,7 @@
 
             <!-- Certification PSPO -->
             <div class="reveal-element p-6 bg-surface rounded-xl border border-line mb-4">
-              <h4 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Certification</h4>
+              <h3 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Certification</h4>
               <div class="flex items-center gap-3">
                 <iconify-icon icon="solar:diploma-verified-linear" class="text-2xl text-primary"></iconify-icon>
                 <div>
@@ -1681,7 +1704,7 @@
 
             <!-- Certification Harvard -->
             <div class="reveal-element p-6 bg-surface rounded-xl border border-line mb-4">
-              <h4 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Certification</h4>
+              <h3 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Certification</h4>
               <div class="flex items-center gap-3">
                 <iconify-icon icon="solar:bolt-circle-linear" class="text-2xl text-primary"></iconify-icon>
                 <div>
@@ -1693,7 +1716,7 @@
 
             <!-- Formation Master -->
             <div class="reveal-element p-6 bg-surface rounded-xl border border-line">
-              <h4 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Formation</h4>
+              <h3 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">Formation</h4>
               <div class="flex items-center gap-3">
                 <iconify-icon icon="solar:square-academic-cap-linear" class="text-2xl text-primary"></iconify-icon>
                 <div>
@@ -1936,7 +1959,11 @@
               <div class="flex items-center gap-4">
                 <img
                   src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png"
-                  alt="Melvyn"
+                  alt="Melvyn Raymond"
+                  width="56"
+                  height="56"
+                  loading="lazy"
+                  decoding="async"
                   class="w-14 h-14 rounded-full border border-white/10 grayscale hover:grayscale-0 transition-all duration-500 object-cover"
                 />
                 <div>
@@ -1992,6 +2019,8 @@
                   <a
                     href="https://www.linkedin.com/in/melvyn-raymond"
                     target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Profil LinkedIn de Melvyn Raymond"
                     class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:bg-white hover:text-black hover:scale-110 transition-all duration-300 group"
                   >
                     <iconify-icon icon="brandico:linkedin" class="text-lg group-hover:scale-110 transition-transform"></iconify-icon>
