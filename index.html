@@ -50,12 +50,22 @@
     {
       "@context": "https://schema.org",
       "@type": "ProfilePage",
+      "name": "Melvyn Raymond — Product Manager Énergie B2B | Portfolio",
+      "url": "https://melvynraymond.com/",
       "dateCreated": "2025-01-01",
       "dateModified": "2026-01-30",
+      "inLanguage": "fr",
+      "author": {
+        "@type": "Person",
+        "name": "Melvyn Raymond"
+      },
       "mainEntity": {
         "@type": "Person",
+        "@id": "https://melvynraymond.com/#person",
         "name": "Melvyn Raymond",
-        "jobTitle": "Product Manager Energy",
+        "givenName": "Melvyn",
+        "familyName": "Raymond",
+        "jobTitle": "Product Manager",
         "description": "Product Manager avec 7 ans d'expérience dans l'énergie B2B. Spécialisé en Product Strategy, SaaS, Product Ops et transformation digitale.",
         "url": "https://melvynraymond.com/",
         "email": "melvyn.raymond@gmail.com",
@@ -70,32 +80,12 @@
         },
         "alumniOf": [
           {
-            "@type": "EducationalOrganization",
+            "@type": "CollegeOrUniversity",
             "name": "EM Strasbourg Business School"
           },
           {
-            "@type": "EducationalOrganization",
+            "@type": "CollegeOrUniversity",
             "name": "Harvard University"
-          }
-        ],
-        "hasCredential": [
-          {
-            "@type": "EducationalOccupationalCredential",
-            "name": "PSPO I - Professional Scrum Product Owner",
-            "credentialCategory": "Certification",
-            "recognizedBy": {
-              "@type": "Organization",
-              "name": "Scrum.org"
-            }
-          },
-          {
-            "@type": "EducationalOccupationalCredential",
-            "name": "Energy Within Environmental Constraints",
-            "credentialCategory": "Certification",
-            "recognizedBy": {
-              "@type": "EducationalOrganization",
-              "name": "Harvard University"
-            }
           }
         ],
         "knowsAbout": [
@@ -115,33 +105,6 @@
           "name": "Optima Énergie"
         }
       }
-    }
-    </script>
-
-    <!-- JSON-LD: WebPage (E-E-A-T signals) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Melvyn Raymond — Product Manager Énergie B2B | Portfolio",
-      "url": "https://melvynraymond.com/",
-      "datePublished": "2025-01-01",
-      "dateModified": "2026-01-30",
-      "author": {
-        "@type": "Person",
-        "name": "Melvyn Raymond",
-        "url": "https://melvynraymond.com/"
-      },
-      "about": {
-        "@type": "Person",
-        "name": "Melvyn Raymond"
-      },
-      "significantLink": [
-        "https://melvynraymond.com/#about",
-        "https://melvynraymond.com/#work",
-        "https://melvynraymond.com/#parcours",
-        "https://melvynraymond.com/#contact"
-      ]
     }
     </script>
 
@@ -242,6 +205,12 @@
       @media (pointer: coarse) {
           .cursor-dot, .cursor-circle { display: none !important; }
           body { cursor: auto; }
+      }
+
+      /* Focus visible – accessible keyboard navigation */
+      :focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
       }
 
       /* Utils */
@@ -407,7 +376,7 @@
           <div class="hidden md:flex items-center gap-3">
             <a
               href="#contact"
-              class="relative inline-flex h-9 cursor-pointer outline-none overflow-hidden transition-all duration-300 ease-out text-xs font-bold uppercase tracking-widest bg-primary text-white border border-primary/10 rounded-full px-5 items-center justify-center hover:bg-gray-800 shadow-md"
+              class="relative inline-flex h-9 cursor-pointer outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary overflow-hidden transition-all duration-300 ease-out text-xs font-bold uppercase tracking-widest bg-primary text-white border border-primary/10 rounded-full px-5 items-center justify-center hover:bg-gray-800 shadow-md"
             >
               <span class="relative z-10">Contact</span>
               <div
@@ -1662,7 +1631,7 @@
               <label for="ai-input" class="sr-only">Posez une question à l'assistant IA</label>
               <input
                 type="text"
-                class="border-none outline-none placeholder-gray-700 focus:placeholder-gray-600 text-white bg-transparent w-full"
+                class="border-none outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary placeholder-gray-700 focus:placeholder-gray-600 text-white bg-transparent w-full"
                 placeholder="Tapez votre question..."
                 autocomplete="off"
                 id="ai-input"
@@ -1917,6 +1886,10 @@
                       background: radial-gradient(65.28% 65.28% at 50% 100%, rgba(34, 211, 238, 0.8) 0%, rgba(34, 211, 238, 0) 10%), linear-gradient(0deg, #2563eb, #2563eb);
                       border: none;
                       outline: none;
+                  }
+                  .animated-btn:focus-visible {
+                      outline: 2px solid #3b82f6;
+                      outline-offset: 2px;
                   }
                   .animated-btn::before,
                   .animated-btn::after {
