@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Melvyn Raymond — Product Manager Énergie B2B</title>
+    <title>Melvyn Raymond — Product Manager Énergie B2B | Portfolio</title>
 
     <!-- Google Search Console -->
     <meta name="google-site-verification" content="-WSLTFc2DfGk8-XsNfdDuKsls87sXJhT_8FpMXA7yNA" />
@@ -13,25 +13,25 @@
     <meta name="author" content="Melvyn Raymond" />
     <meta name="theme-color" content="#0F172A" />
     <link rel="canonical" href="https://melvynraymond.com/" />
-    <link rel="icon" type="image/png" href="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7eb912df-8284-4582-93bf-b06933373bdb_320w.png" />
+    <link rel="icon" type="image/png" href="favicon.png" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Melvyn Raymond" />
-    <meta property="og:title" content="Melvyn Raymond — Product Manager Énergie B2B" />
+    <meta property="og:title" content="Melvyn Raymond — Product Manager Énergie B2B | Portfolio" />
     <meta property="og:description" content="Product Manager avec 7 ans d'expérience dans l'énergie B2B. Spécialisé en Product Strategy, SaaS, Product Ops et transformation digitale." />
     <meta property="og:url" content="https://melvynraymond.com/" />
-    <meta property="og:image" content="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/76397c14-f815-4738-8905-52a30f93d4fe_800w.png" />
-    <meta property="og:image:width" content="800" />
-    <meta property="og:image:height" content="1000" />
-    <meta property="og:image:alt" content="Melvyn Raymond — Product Manager Énergie B2B" />
+    <meta property="og:image" content="https://melvynraymond.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Melvyn Raymond — Product Manager Énergie B2B | Portfolio" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Melvyn Raymond — Product Manager Énergie B2B" />
+    <meta name="twitter:title" content="Melvyn Raymond — Product Manager Énergie B2B | Portfolio" />
     <meta name="twitter:description" content="Product Manager avec 7 ans d'expérience dans l'énergie B2B. Spécialisé en Product Strategy, SaaS, Product Ops et transformation digitale." />
-    <meta name="twitter:image" content="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/76397c14-f815-4738-8905-52a30f93d4fe_800w.png" />
+    <meta name="twitter:image" content="https://melvynraymond.com/og-image.jpg" />
 
     <!-- JSON-LD Structured Data (SEO + GEO) -->
     <script type="application/ld+json">
@@ -1028,11 +1028,25 @@
           </div>
           <div
             class="lg:col-span-7 overflow-hidden rounded-lg aspect-[4/3] md:aspect-[16/10] relative cursor-pointer order-2 lg:order-2 bg-gray-100"
+            id="plateforme-carousel"
           >
             <img
               src="plateforme-management.png"
-              alt="Plateforme Management Énergétique"
-              class="project-img w-full h-full object-cover object-top"
+              alt="Plateforme — Bilan énergétique"
+              class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 opacity-100"
+              data-carousel-slide
+            />
+            <img
+              src="screen1.png"
+              alt="Plateforme — Optimisation électrique"
+              class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 opacity-0"
+              data-carousel-slide
+            />
+            <img
+              src="screen2.jpg"
+              alt="Plateforme — Suivi Facturation"
+              class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 opacity-0"
+              data-carousel-slide
             />
           </div>
         </div>
@@ -1970,6 +1984,21 @@
       });
       function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
       requestAnimationFrame(raf);
+
+      // Plateforme Carousel
+      (function() {
+        const slides = document.querySelectorAll('#plateforme-carousel [data-carousel-slide]');
+        if (slides.length > 1) {
+          let current = 0;
+          setInterval(() => {
+            slides[current].classList.remove('opacity-100');
+            slides[current].classList.add('opacity-0');
+            current = (current + 1) % slides.length;
+            slides[current].classList.remove('opacity-0');
+            slides[current].classList.add('opacity-100');
+          }, 3000);
+        }
+      })();
 
       // GSAP Animations
       gsap.registerPlugin(ScrollTrigger);
